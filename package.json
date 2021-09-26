@@ -9,9 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "firebase": "^9.0.2",
+    "firebase-admin": "^9.11.1",
+    "formik": "^2.2.9",
     "next": "11.1.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-loading-skeleton": "^2.2.0",
+    "react-svg-star-rating": "^2.1.1",
+    "sass": "^1.41.1"
   },
   "devDependencies": {
     "@types/react": "17.0.21",

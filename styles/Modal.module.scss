@@ -1,0 +1,96 @@
+.main{
+    display: none;
+    top: 0;
+    background-color: rgba(36, 36, 36, 0.664);
+    backdrop-filter: blur(5px);
+    left: 0;
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    z-index: 999;
+    transition: 1s;
+}
+
+.modalOpen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgb(0, 0, 0, .2);
+    width: 290px;
+
+    p{
+        color: tomato;
+        font-size: 15px;
+        line-height: 15px;
+        margin-top: 15px;
+        font-weight: 500;
+    }
+
+    h6{
+        text-align: center;
+        text-decoration: underline;
+        cursor: pointer;
+        color: #3a3a3a;
+        font-size: 13px;
+        line-height: 13px;
+        font-weight: 500;
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        transition: .2s;
+
+        h1{
+            text-align: center;
+            font-size: 20px;
+            line-height: 20px;
+            font-weight: 500;
+            letter-spacing: 0px;
+            margin-bottom: 10px;
+            color: #3a3a3a;
+        }
+
+        p{
+            margin-top: -3px;
+            color: tomato;
+            font-size: 13px;
+            line-height: 5px;
+            padding-left: 20px;
+        }
+    
+        input, button{
+            border: none;
+            border-radius: 30px;
+            padding: 12px 25px;
+            outline: none;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+        }
+    
+        button{
+            border: none;
+            color: rgb(238, 238, 238);
+            letter-spacing: .7px;
+            font-weight: 500;
+            background: linear-gradient(90deg, #FF5E6B 0%, #FC0B74 100%);
+            cursor: pointer;
+        }
+
+        button:disabled,
+        button[disabled]{
+            opacity: .5;
+            cursor: default;
+        }
+    }
+}
