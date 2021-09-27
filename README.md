@@ -1,6 +1,6 @@
 # Challenge Softvision
 
-n proyecto que simula un mini servicio de streming de peliculas, el mismo cuenta con autenticación de usuarios, realizada con firebase.
+Un proyecto que simula un mini servicio de streming de peliculas, el mismo cuenta con autenticación de usuarios, realizada con firebase.
 
 ## Instalación 🔧
 
