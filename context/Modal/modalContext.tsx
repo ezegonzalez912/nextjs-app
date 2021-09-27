@@ -22,8 +22,15 @@ export const ModalProvider: React.FC<Props> = ({children}) => {
         setIsOpenModal(value ? value : !isOpenModal)
     }
 
+    const data = {
+        isOpenModal, 
+        handleOpenModal, 
+        modal, 
+        setModal
+    }
+
     return (
-        <modalContext.Provider value={{isOpenModal, handleOpenModal, modal, setModal}}>
+        <modalContext.Provider value={data}>
             {children}
         </modalContext.Provider>
     )

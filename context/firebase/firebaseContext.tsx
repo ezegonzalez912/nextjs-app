@@ -8,6 +8,8 @@ import FirebaseAuthTypes, {
     onAuthStateChanged, 
     signInWithEmailAndPassword,
     signOut,
+    signInWithPopup,
+    GoogleAuthProvider
 } from "firebase/auth";
 
 interface ContextProps {
@@ -15,6 +17,7 @@ interface ContextProps {
     userRegister: (name: string, email: string, password: string) => Promise<unknown>;
     loginUser: (email: string, password: string) => Promise<unknown>;
     logoutUser: () => void;
+    loginUserWithGoogle: () => Promise<unknown>;
 }
 
 interface Props {
@@ -86,12 +89,27 @@ export const FirebaseProvider: React.FC<Props> = ({children}) => {
         });
     }
 
+    const loginUserWithGoogle = () => {
+        return new Promise((resolve, reject) => {
+            const provider = new GoogleAuthProvider();
+            const auth = getAuth();
+            signInWithPopup(auth, provider)
+            .then((result) => {
+                const user = result.user;
+                setUser(user)
+                return resolve("")
+            }).catch(() => {
+                return reject("Error connecting to google")
+            });
+        })
+    }
 
     const data = {
         user,
         userRegister,
         loginUser,
-        logoutUser
+        logoutUser,
+        loginUserWithGoogle
     }
 
     return (

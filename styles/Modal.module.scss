@@ -45,6 +45,54 @@
         font-weight: 500;
     }
 
+    input, button{
+        border: none;
+        border-radius: 30px;
+        padding: 12px 25px;
+        outline: none;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        transition: .2s ease-in;
+    }
+
+    input:focus{
+        border: 1px solid #FC0B74;
+    }
+
+    button{
+        border: none;
+        color: rgb(238, 238, 238);
+        letter-spacing: .7px;
+        font-weight: 500;
+        background: linear-gradient(90deg, #FF5E6B 0%, #FC0B74 100%);
+        cursor: pointer;
+        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    button:disabled,
+    button[disabled]{
+        opacity: .5;
+        cursor: default;
+    }
+
+    .googleBTN{
+        background: white;
+        color: #3a3a3a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin: 7px 0;
+        width: 100%;
+
+        svg{
+            height: 20px;
+        }
+
+        &:hover{
+            background: rgb(245, 245, 245);
+        }
+    }
+
     form{
         display: flex;
         flex-direction: column;
@@ -68,29 +116,6 @@
             font-size: 13px;
             line-height: 5px;
             padding-left: 20px;
-        }
-    
-        input, button{
-            border: none;
-            border-radius: 30px;
-            padding: 12px 25px;
-            outline: none;
-            border: 1px solid rgba(0, 0, 0, 0.15);
-        }
-    
-        button{
-            border: none;
-            color: rgb(238, 238, 238);
-            letter-spacing: .7px;
-            font-weight: 500;
-            background: linear-gradient(90deg, #FF5E6B 0%, #FC0B74 100%);
-            cursor: pointer;
-        }
-
-        button:disabled,
-        button[disabled]{
-            opacity: .5;
-            cursor: default;
         }
     }
 }

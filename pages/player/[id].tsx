@@ -2,15 +2,18 @@ import React, { useContext, useEffect } from 'react'
 import Head from 'next/head'
 import styles from '../../styles/Player.module.scss'
 import { useRouter } from 'next/router'
-import { ArrowBack } from '../../components/ui/Assets/ArrowBack'
+import { ArrowBack } from '../../Assets/ArrowBack'
 import { firebaseContext } from '../../context/firebase/firebaseContext'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import { Video } from '../../types'
 
 interface Props {
-    videos: any
+    videos: Video[]
 }
 
 const PlayerScreen: React.FC<Props> = ({videos}) => {
+
+    console.log(videos)
 
     const { user } = useContext(firebaseContext)
     const router = useRouter()
@@ -21,7 +24,7 @@ const PlayerScreen: React.FC<Props> = ({videos}) => {
 
     const goBack = () => router.push("/")
 
-    const {key, name} = videos[0] ? videos[0] : {key: null, name: "Error"}
+    const {key, name} = videos ? videos[0] : {key: null, name: "Error"}
 
     if(user === undefined) return <SkeletonTheme color="#2c2b2b" highlightColor="#3a3939"><Skeleton height="99vh"/></SkeletonTheme>
 
@@ -47,13 +50,19 @@ const PlayerScreen: React.FC<Props> = ({videos}) => {
 
 export default PlayerScreen
 
-export async function getServerSideProps(context: any) {
+interface ContextProps {
+    params: {
+        id: string
+    }
+}
+
+export async function getServerSideProps (context: ContextProps) {
 
     const { id } = context.params
 
     const videos = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?api_key=09b4df40215aa02cfcbd383f6e8cffef&language=en-US`)
     .then(res => res.json())
-    .then(res => res.results) || null
+    .then(res => res.results) || null;
 
     return {
       props: { videos }

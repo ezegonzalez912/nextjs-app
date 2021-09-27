@@ -17,8 +17,6 @@ export const MenuNavBar: React.FC<Props> = ({setMenu}) => {
 
     return (
         <div className={styles.menu}>
-            <p>Favourites</p>
-            <p>Account</p>
             <p onClick={handleLogout}>Logout</p>
         </div>
     )

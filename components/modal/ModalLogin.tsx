@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import { firebaseContext } from "../../context/firebase/firebaseContext";
 import { modalContext } from "../../context/Modal/modalContext";
 import styles from '../../styles/Modal.module.scss'
+import { GoogleIcon } from "../../Assets/GoogleIcon";
 
 interface Values {
     email: string;
@@ -15,7 +16,7 @@ export const ModalLogin: React.FC = () => {
         e.stopPropagation();
     }
 
-    const { loginUser } = useContext(firebaseContext);
+    const { loginUser, loginUserWithGoogle } = useContext(firebaseContext);
     const { handleOpenModal, setModal } = useContext(modalContext)
 
     const [errors, setErrors] = useState<String>("")
@@ -27,10 +28,23 @@ export const ModalLogin: React.FC = () => {
             actions.setSubmitting(false);
             actions.resetForm();
             handleOpenModal(false)
+            setErrors("")
         })
         .catch((err:string) => {
             actions.setSubmitting(false);
             setErrors(err)
+        })
+    }
+
+    const handleLoginWithGoogle = () => {
+        setErrors("")
+        loginUserWithGoogle()
+        .then(() => {
+            handleOpenModal(false)
+            setErrors("")
+        })
+        .catch((res) => {
+            setErrors(res)
         })
     }
 
@@ -53,15 +67,21 @@ export const ModalLogin: React.FC = () => {
                 onSubmit={handleLogin}
                 >
                 {({isSubmitting}) => (
-                    <Form className={styles.authContainer}>
-                        <h1>Login to view content</h1>
-                        <Field name="email" placeholder="Email"/>
-                        <ErrorMessage name="email" component="p"/>
-                        <Field name="password" placeholder="Password" type="Password"/>
-                        <ErrorMessage name="password" component="p"/>
-                        <button type="submit" disabled={isSubmitting}>Login</button>
+                    <>
+                        <Form className={styles.authContainer}>
+                            <h1>Login to view content</h1>
+                            <Field name="email" placeholder="Email"/>
+                            <ErrorMessage name="email" component="p"/>
+                            <Field name="password" placeholder="Password" type="Password"/>
+                            <ErrorMessage name="password" component="p"/>
+                            <button type="submit" disabled={isSubmitting}>Login</button>
+                        </Form>
+                        <button className={styles.googleBTN} disabled={isSubmitting} onClick={handleLoginWithGoogle}>
+                            <GoogleIcon />
+                            Sing up with Google
+                        </button>
                         <h6 onClick={() => setModal("register")}>I do not have an account</h6>
-                    </Form>
+                    </>
                 )}
             </Formik>
             <p>{errors}</p>

@@ -1,11 +1,11 @@
 import { useContext, useState } from "react"
 import { modalContext } from "../../../context/Modal/modalContext"
 import { firebaseContext } from "../../../context/firebase/firebaseContext"
-import { ThreePoints } from "../Assets/ThreePoints"
+import { ThreePoints } from "../../../Assets/ThreePoints"
 import { MenuNavBar } from "./MenuNavBar"
 import styles from '../../../styles/NavBar.module.scss'
 
-export const NavBar = () => {
+export const NavBar: React.FC = () => {
 
     const { user } = useContext(firebaseContext)
     const { handleOpenModal } = useContext(modalContext)
@@ -16,6 +16,7 @@ export const NavBar = () => {
         <nav className={styles.nav}>
             <h1>MOVIENEXT</h1>
             <section>
+                {menu && <MenuNavBar setMenu={setMenu} />}
                 {user ?
                     <> 
                         <p>{user?.displayName?.toLocaleUpperCase()}</p>
@@ -26,7 +27,6 @@ export const NavBar = () => {
                     :
                     <p onClick={() => handleOpenModal()}>Login</p>
                 }
-                {menu && <MenuNavBar setMenu={setMenu}/>}
             </section>
         </nav>
     )

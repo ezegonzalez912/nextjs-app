@@ -1,17 +1,19 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
-import { useContext, useEffect, useState } from 'react'
-import StarRating from 'react-svg-star-rating'
-import { ArrowUp } from '../components/ui/Assets/ArrowUp'
-import { ArrowDown } from '../components/ui/Assets/ArrowDown'
+import { useEffect, useState } from 'react'
 import { Modal } from '../components/modal/Modal'
-import { modalContext } from '../context/Modal/modalContext'
-import { useRouter } from 'next/router'
-import { firebaseContext } from '../context/firebase/firebaseContext'
-import { NavBar } from '../components/ui/Navbar/NavBar'
+import { Main } from '../components/Home/Main'
+import { Movie } from '../types'
 
-const Home: NextPage = (props: any) => {
+interface Props {
+  moviesTrending: {
+    page: string
+    results: Movie[]
+  }
+}
+
+const Home: NextPage<Props> = (props) => {
 
   const { results } = props.moviesTrending; 
 
@@ -21,8 +23,6 @@ const Home: NextPage = (props: any) => {
   useEffect(() => {
     setMovieActive(results[currentMovie])
   }, [currentMovie])
-
-  const average = movieActive.vote_average * 0.5 
 
   const prevMovie = () => {
     if(currentMovie !== 0){
@@ -36,18 +36,6 @@ const Home: NextPage = (props: any) => {
     }
   }
 
-  const router = useRouter();
-
-  const { user } = useContext(firebaseContext)
-  const { handleOpenModal } = useContext(modalContext)
-
-  const handlePlay = () => {
-    if(user){
-      return router.push(`/player/${movieActive.id}`)
-    }
-    handleOpenModal()
-  }
-
   return (
     <div className={styles.container}>
       <Head>
@@ -56,26 +44,7 @@ const Home: NextPage = (props: any) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Modal />
-      <main className={styles.main} style={{backgroundImage: `url(https://image.tmdb.org/t/p/original/${movieActive.backdrop_path})`}}>
-        <NavBar />
-        <div className={styles.grid}>
-          <section className={styles.section}>
-            <h1>{movieActive.original_name || movieActive.original_title}</h1>
-            <StarRating initialRating={average} activeColor="white" emptyColor="#ffffff4c"isReadOnly={true} unit="half" />
-            <p>{movieActive.overview}</p>
-            <p className={styles.language}>{movieActive.original_language.toLocaleUpperCase()}</p>
-            <button onClick={handlePlay}>PLAY</button>
-          </section>
-          <div className={styles.controls}>
-            <button onClick={nextMovie}>
-              <ArrowUp />
-            </button>
-            <button onClick={prevMovie}>
-              <ArrowDown />
-            </button>
-          </div>
-        </div>
-      </main>
+      <Main movie={movieActive} prevMovie={prevMovie} nextMovie={nextMovie} />
     </div>
   )
 }
