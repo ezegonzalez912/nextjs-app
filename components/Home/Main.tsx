@@ -35,8 +35,10 @@ export const Main:React.FC<Props> = ({movie, prevMovie, nextMovie}) => {
           <NavBar />
           <div className={styles.grid}>
             <section className={styles.section}>
-              <h1>{movie.original_name || movie.original_title}</h1>
-              <StarRating initialRating={average} activeColor="white" emptyColor="#ffffff4c"isReadOnly={true} unit="half" />
+              <h1 className={styles.title}>{movie.original_name || movie.original_title}</h1>
+              <div className={styles.stars}>
+                <StarRating initialRating={average} activeColor="white" emptyColor="#ffffff4c"isReadOnly={true} unit="half" />
+              </div>
               <p>{movie.overview}</p>
               <p className={styles.language}>{movie.original_language.toLocaleUpperCase()}</p>
               <button onClick={handlePlay}>{movie.video === undefined ? "COMING SOON..." : "PLAY"}</button>

@@ -39,8 +39,8 @@ const Home: NextPage<Props> = (props) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Practice Next.js</title>
-        <meta name="description" content="Practice Next.js" />
+        <title>MOVIENEXT</title>
+        <meta name="description" content="Practice Next.js create by Ezequiel Gonzalez" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Modal />
