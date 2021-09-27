@@ -83,3 +83,14 @@
         }
     }
 }
+
+@media (max-width: 600px) {
+    .nav{
+        section{
+            .menu{
+                top: 65px;
+                right: 20px;
+            }
+        }
+    }
+}
