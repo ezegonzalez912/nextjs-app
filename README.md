@@ -1,4 +1,4 @@
-# Challenge Softvision
+# Next Movie
 
 Un proyecto que simula un mini servicio de streming de peliculas, el mismo cuenta con autenticación de usuarios, realizada con firebase.
 
