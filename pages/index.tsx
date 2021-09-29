@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Modal } from '../components/modal/Modal'
 import { Main } from '../components/Home/Main'
 import { Movie } from '../types'
@@ -20,19 +20,17 @@ const Home: NextPage<Props> = (props) => {
   const [currentMovie, setCurrentMovie] = useState(0)
   const [movieActive, setMovieActive] = useState(results[currentMovie])
 
-  useEffect(() => {
-    setMovieActive(results[currentMovie])
-  }, [currentMovie])
-
   const prevMovie = () => {
     if(currentMovie !== 0){
       setCurrentMovie(currentMovie - 1)
+      setMovieActive(results[currentMovie])
     }
   }
 
   const nextMovie = () => {
     if((results.length - 1) !== currentMovie){
       setCurrentMovie(currentMovie + 1)
+      setMovieActive(results[currentMovie])
     }
   }
 
